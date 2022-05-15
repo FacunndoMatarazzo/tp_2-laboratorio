@@ -14,7 +14,7 @@
 #define VACIO 0
 #define LLENO 1
 
-int Passengers(sPasajero* lista, int len)
+int initPassengers(sPasajero* lista, int len)
 {
 	int index;
 	int i;
@@ -201,71 +201,9 @@ int AddPassenger(sPasajero* lista, int len, int id, char name[],char lastName[],
 		return retorno;
 	}
 
-int sortPassengersByCode(sPasajero* lista, int len, int orden)
-{
-	sPasajero auxiliar;
-	int retorno = -1;
 
-	if (lista != NULL)
-	{
-		if (len >= 0)
-		{
-			if (orden == 1)
-			{
-			for (int i = 0; i < len; i++)
-				{
-					for(int j = i + 1; j < len - 1; j++)
-						{
-						if (strcmp(lista[i].flycode, lista[j].flycode) > 0)
-							{
-								auxiliar = lista[j];
-								lista[j] = lista[i];
-								lista[i] = auxiliar;
-							}
-						if(strcmp(lista[i].flycode, lista[j].flycode) == 0)
-							{
-								if(lista[i].statusFlight > lista[j].statusFlight)
-								{
-									auxiliar = lista[j];
-									lista[j] = lista[i];
-									lista[i] = auxiliar;
-								}
-							}
-						}
-					}
-			}
-			else
-				{
-				for (int i = 0; i < len; i++)
-				{
-				for(int j = i + 1; j < len - 1; j++)
-					{
-						if (strcmp(lista[i].flycode, lista[j].flycode) < 0)
-						{
-						auxiliar = lista[j];
-						lista[j] = lista[i];
-						lista[i] = auxiliar;
-						}
-						if(strcmp(lista[i].flycode, lista[j].flycode) == 0)
-							{
-								if(lista[i].statusFlight > lista[j].statusFlight)
-								{
-									auxiliar = lista[j];
-									lista[j] = lista[i];
-									lista[i] = auxiliar;
-								}
-							}
-					}
-				}
-			}
-			retorno = 0;
-		}
-	}
 
-	return retorno;
-}
-
-/*int sortPassengersByCode(sPasajero* lista, int len, int order)
+int sortPassengersByCode(sPasajero* lista, int len, int order)
 {
 	sPasajero auxiliar;
 	int retorno = -1;
@@ -327,7 +265,7 @@ int sortPassengersByCode(sPasajero* lista, int len, int orden)
 		}
 
 	return retorno;
-}*/
+}
 
 
 int StatusYTypePasassenger(sTypeStatusPassenger* statusType, int len)

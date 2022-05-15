@@ -1,7 +1,22 @@
 /*
  ============================================================================
  Name        : tp_2.c
- Author      : 
+*	Objetivo:
+*		Una aerolínea requiere un sistema para administrar los pasajeros de cada vuelo. Se sabe que
+*		no puede tener más de 2000 pasajeros.
+*
+*		El sistema deberá tener el siguiente menú de opciones:
+*			1. ALTAS: Se debe permitir ingresar un pasajero calculando automáticamente el
+*				número de Id. El resto de los campos se le pedirá al usuario.
+*			2. MODIFICAR: Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido
+*				o Precio o Tipo de pasajero o Código de vuelo
+*			3. BAJA: Se ingresará el Número de Id y se eliminará el empleado del sistema.
+*			4. INFORMAR:
+*				1. Listado de los pasajeros ordenados alfabéticamente por Apellido y Tipo de pasajero.
+*				2. Total y promedio de los precios de los pasajes, y cuántos pasajeros superan el precio
+*				promedio.
+*				3. Listado de los pasajeros por Código de vuelo y estados de vuelos ‘ACTIVO’
+ Author      : Facundo Matarazzo 1 C
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
@@ -25,9 +40,9 @@ int main(void) {
 	int opcionMInfo;
 	int opcionIdModificar;
 	int indiceAModificar;
-	int opcionIdBajar;
+	int opcionIdBaja;
 	int indiceABajar;
-	int id = 0;
+	int id = 1000;
 	char nombre[51];
 	char apellido[51];
 	float precio;
@@ -37,20 +52,20 @@ int main(void) {
 	float precioPromedio;
 	int cantPasajeroPorEncimaDelPromedio;
 	int estadoDelVuelo;
-	int estadoVueloYTipoPas;
+
 
 	sPasajero listaDePasajeros[TAMPASAJEROS];
-	StatusYTypePasassenger(estadoVueloYTipoPas, TAMTIPOPASAJEROS)
-	;
+	sTypeStatusPassenger estadoVueloYTipoPas [TAMTIPOPASAJEROS];
+
 
 	setbuf(stdout, NULL);
 
-	if(Passengers(listaDePasajeros, TAMPASAJEROS)!= 0)
+	if(initPassengers(listaDePasajeros, TAMPASAJEROS)!= 0)
 	{
 		printf("\nError al inicializar la estructura.\n");
 	}
 
-	if(StatusYTypePasassenger(estadoVueloYTipoPas, TAMTIPOPASAJEROS) != 0)
+	if(StatusYTypePasassenger(estadoVueloYTipoPas, TAMTIPOPASAJEROS)!= 0)
 	{
 		printf("\nError al inicializar la estructura.\n");
 	}
@@ -102,11 +117,12 @@ int main(void) {
 					scanf("%d", &opcionMM);
 					switch(opcionMM)
 					{
+
 						case 1:
 							printf("Indique el ID del pasajero que desea modificar: ");
 							fflush(stdin);
 							scanf("%d", &opcionIdModificar);
-							indiceAModificar = BuscarLibre(listaDePasajeros, TAMPASAJEROS, opcionIdModificar);
+							indiceAModificar = BuscarLibre(listaDePasajeros, TAMPASAJEROS);
 							if (indiceAModificar > -1)
 							{
 								if(ModificarPasajero(listaDePasajeros, TAMPASAJEROS, indiceAModificar, opcionMM) == 0)
@@ -134,8 +150,8 @@ int main(void) {
 			case 3:
 				printf("Ingrese el ID del pasajero que desea dar de baja: ");
 				fflush(stdin);
-				scanf("%d", &opcionIdBajar);
-				indiceABajar = BuscarLibre(listaDePasajeros, TAMPASAJEROS, opcionIdBajar);
+				scanf("%d", &opcionIdBaja);
+				indiceABajar = BuscarLibre(listaDePasajeros, TAMPASAJEROS);
 				if (indiceABajar > -1)
 				{
 					if(removePassenger(listaDePasajeros, TAMPASAJEROS, indiceABajar) == 0)
@@ -211,16 +227,19 @@ int main(void) {
 				}while(opcionMInfo != 4);
 				break;
 			case 5:
-				/*id++;
-				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  id, "Juan", "Perez", 58259.25, 1, "AMOA-85", 1);
-				id++;
-				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  id,  "Ramiro", "Orta", 25853.36, 3, "DADD-02", 3);
-				id++;
-				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  id,  "Facundo", "Soliz", 15953.85, 2, "DADW-85", 2);
-				id++;
-				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  id,  "Joaquin", "Alvarez", 27125.5,	0, 1, "CHDQ-52", 1);
 
-				printf("\nSe cargaron con exito todos los usuarios de la carga forzada.\n");*/
+				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  1200, "Juan", "Perez", 5825.25, 1, "AMOA-85", 1);
+
+				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  1236,  "Ramiro", "Orta", 2585.36, 3, "DADD-02", 3);
+
+				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  1120,  "Facundo", "Soliz", 1553.85, 2, "DADW-85", 2);
+
+				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  1110,  "Pepito", "Araceli", 6653.85, 2, "ADFA-95", 1);
+
+				AddPassenger(listaDePasajeros,  TAMPASAJEROS,  1005,  "Facundo", "Soliz", 1853.85, 2, "ADWW-27", 3);
+
+				printf("\nSe cargaron con exito todos los usuarios de la carga forzada.\n");
+
 				break;
 			case 6:
 				printf("\n Sistema cerrado.\n");
